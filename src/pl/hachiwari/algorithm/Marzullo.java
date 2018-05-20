@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class Marzullo implements Algorithm {
 
+    // https://en.wikipedia.org/wiki/Marzullo%27s_algorithm
     private List<Pair> timePairs = new ArrayList<>();
     private final TimeRange result = new TimeRange();
 

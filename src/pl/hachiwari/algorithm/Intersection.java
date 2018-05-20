@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Intersection implements Algorithm {
 
-    //https://en.wikipedia.org/wiki/Intersection_algorithm
+    // https://en.wikipedia.org/wiki/Intersection_algorithm
     private List<Pair> timePairs = new ArrayList<>();
     private final TimeRange result = new TimeRange();
     private int f;
