@@ -2,29 +2,34 @@ package pl.hachiwari;
 
 public class TimeRange {
 
-    private int timeStart, timeEnd;
+    private double timeStart, timeEnd;
 
     public TimeRange() {
     }
 
-    public TimeRange(int timeStart, int timeEnd) {
+    public TimeRange(double timeStart, double timeEnd) {
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
     }
 
-    public int getTimeStart() {
+    public double getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(int timeStart) {
+    public void setTimeStart(double timeStart) {
         this.timeStart = timeStart;
     }
 
-    public int getTimeEnd() {
+    public double getTimeEnd() {
         return timeEnd;
     }
 
-    public void setTimeEnd(int timeEnd) {
+    public void setTimeEnd(double timeEnd) {
+        this.timeEnd = timeEnd;
+    }
+
+    public void setTime(double timeStart, double timeEnd) {
+        this.timeStart = timeStart;
         this.timeEnd = timeEnd;
     }
 
