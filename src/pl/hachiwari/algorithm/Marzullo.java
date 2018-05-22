@@ -5,12 +5,11 @@ import pl.hachiwari.algorithm.model.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Marzullo implements Algorithm {
 
     // https://en.wikipedia.org/wiki/Marzullo%27s_algorithm
-    private List<Pair> timePairs = new ArrayList<>();
+    private final List<Pair> timePairs = new ArrayList<>();
     private final TimeRange result = new TimeRange();
 
     public Marzullo(List<TimeRange> timeRanges) {
@@ -18,7 +17,16 @@ public class Marzullo implements Algorithm {
             timePairs.add(new Pair(timeRange.getTimeStart(), -1));
             timePairs.add(new Pair(timeRange.getTimeEnd(), +1));
         });
-        timePairs = timePairs.stream().sorted((Pair::compareTo)).collect(Collectors.toList());
+
+        timePairs.sort((o1, o2) -> {
+            int compare = Double.compare(o1.getOffset(), o2.getOffset());
+
+            if (compare != 0) {
+                return compare;
+            }
+
+            return Integer.compare(o2.getType(), o1.getType());
+        });
     }
 
     @Override

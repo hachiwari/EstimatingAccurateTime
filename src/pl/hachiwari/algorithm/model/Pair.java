@@ -1,6 +1,6 @@
 package pl.hachiwari.algorithm.model;
 
-public class Pair implements Comparable<Pair> {
+public class Pair {
 
     private final double offset;
     private final int type;
@@ -24,20 +24,5 @@ public class Pair implements Comparable<Pair> {
                 "offset=" + offset +
                 ", type='" + type + '\'' +
                 '}';
-    }
-
-    @Override
-    public int compareTo(Pair o) {
-        if (o == null) {
-            return 1;
-        }
-
-        int compare = Double.compare(this.getOffset(), o.getOffset());
-
-        if (compare != 0) {
-            return compare;
-        }
-
-        return Integer.compare(o.getType(), this.getType());
     }
 }

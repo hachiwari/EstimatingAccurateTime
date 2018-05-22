@@ -16,16 +16,8 @@ public class TimeRange {
         return timeStart;
     }
 
-    public void setTimeStart(double timeStart) {
-        this.timeStart = timeStart;
-    }
-
     public double getTimeEnd() {
         return timeEnd;
-    }
-
-    public void setTimeEnd(double timeEnd) {
-        this.timeEnd = timeEnd;
     }
 
     public void setTime(double timeStart, double timeEnd) {

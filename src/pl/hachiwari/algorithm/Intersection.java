@@ -5,15 +5,14 @@ import pl.hachiwari.algorithm.model.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Intersection implements Algorithm {
 
     // https://en.wikipedia.org/wiki/Intersection_algorithm
-    private List<Pair> timePairs = new ArrayList<>();
+    private final List<Pair> timePairs = new ArrayList<>();
     private final TimeRange result = new TimeRange();
     private int f;
-    private final int M;
+    private final double M;
 
     public Intersection(List<TimeRange> timeRanges) {
         timeRanges.forEach(timeRange -> {
@@ -21,8 +20,18 @@ public class Intersection implements Algorithm {
             timePairs.add(new Pair((timeRange.getTimeStart() + timeRange.getTimeEnd()) / 2, 0));
             timePairs.add(new Pair(timeRange.getTimeEnd(), +1));
         });
+
         M = timePairs.size() / 3;
-        timePairs = timePairs.stream().sorted((Pair::compareTo)).collect(Collectors.toList());
+
+        timePairs.sort((o1, o2) -> {
+            int compare = Double.compare(o1.getOffset(), o2.getOffset());
+
+            if (compare != 0) {
+                return compare;
+            }
+
+            return Integer.compare(o1.getType(), o2.getType());
+        });
     }
 
     @Override
@@ -31,7 +40,7 @@ public class Intersection implements Algorithm {
         double lower = 0, upper = 0;
 
         // f = 0 assuming all input intervals are valid
-        for (f = 0; f < M/2; f++) {
+        for (f = 0; f < (int)Math.ceil(M/2); f++) {
             midcount = 0;
             endcount = 0;
 
@@ -70,7 +79,7 @@ public class Intersection implements Algorithm {
         strResult.append("<< Intersection Algorithm >>\n");
         strResult.append("Sorted time pairs: ");
         timePairs.forEach(timePair -> strResult.append(String.format("<%.1f;%d> ", timePair.getOffset(), timePair.getType())));
-        strResult.append(String.format("\nGood/Bad intervals = %d/%d", (M-f), f));
+        strResult.append(String.format("\nGood/Bad intervals = %.1f/%d", (M-f), f));
 
         TimeRange result = getResult();
         if (result.getTimeStart() != result.getTimeEnd()) {
